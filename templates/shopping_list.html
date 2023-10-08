@@ -1,0 +1,11 @@
+{% block content %}
+<div id="content">
+  <input type="text" id="add_new_item" value="yoyo yo yo y">
+  <button type="button" id="submit_button">Submit</button>
+  <ul>
+  {% for item in shopping_list %}
+      <li>{{ item }}</li>
+  {% endfor %}
+  </ul>
+</div>
+{% endblock %}
