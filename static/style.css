@@ -25,3 +25,7 @@ body {
     display: table-cell;
     vertical-align: middle;
 }
+
+.list-item{
+  font-size: 40px;
+}

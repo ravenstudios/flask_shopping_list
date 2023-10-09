@@ -1,27 +1,34 @@
+`
+  TODO:
+    Uppercase
+    Confirm delete
+`
 
-//
-// document.addEventListener("DOMContentLoaded", function() {
-//
-// });
 
-window.addEventListener("DOMContentLoaded", function() {
-  console.log("Hello World!");
-  document.getElementById("submit_button").addEventListener("click", myFunction);
+$(()=> {
+    $("#add-new-item").focus()
+    $("#submit-button").click(addNewItem())
+    $("#add-new-item").keyup(function(event) {
+      if (event.keyCode === 13) {
+          addNewItem()
+      }
+  });
 });
 
-function myFunction() {
-  console.log("clicked")
-  x = document.getElementById("add_new_item").value
-  fetch("/add_new_item", {
-  method: "POST",
-  body: JSON.stringify({
-    item: x,
-    completed: false
-  }),
-  headers: {
-    "Content-type": "application/json; charset=UTF-8"
+function addNewItem() {
+  let textboxValue = $("#add-new-item").val()
+  textboxValue = textboxValue.charAt(0).toUpperCase()+ textboxValue.slice(1)
+
+  if (textboxValue){
+    fetch("/add-new-item", {
+    method: "POST",
+    body: JSON.stringify({
+      item: textboxValue,
+      completed: false
+    }),
+    headers: {
+      "Content-type": "application/json; charset=UTF-8"
+    }
+  }).then(()=>{location.reload()})
   }
-});
-  console.log(x);
-  // document.getElementById("demo").innerHTML = "YOU CLICKED ME!";
 }
