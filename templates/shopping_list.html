@@ -1,12 +1,17 @@
 {% block content %}
 <div id="content">
-  <input type="text" id="add-new-item" value="">
-  <button type="button" id="submit-button">Submit</button>
+  <p>Enter New Item</p>
+  <div id="input-section">
+
+    <input type="text" id="add-new-item" value="">
+
+  </div>
+
   <ul>
   {% for item in shopping_list %}
-      <li class="list-item">{{ item.item }}<a href="/delete/{{ item._id }}">
-        <button type="button" class="del-button">X</button>
-      </a></li>
+      <li class="list-item">{{ item.item }}
+        <button id="{{ item._id }}" type="button" class="del-button">X</button>
+      </li>
 
   {% endfor %}
   </ul>
