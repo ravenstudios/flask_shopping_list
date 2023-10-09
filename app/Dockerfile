@@ -1,23 +1,20 @@
-# start by pulling the python image
-FROM python:3.8-alpine
+# Use an official Python runtime as a parent image
+FROM python:3.8
 
-# copy the requirements file into the image
-COPY ./requirements.txt /app/requirements.txt
-
-# switch working directory
+# Set the working directory inside the container
 WORKDIR /app
 
-# install the dependencies and packages in the requirements file
-RUN pip3 install -r requirements.txt
-
-RUN git clone https://github.com/ravenstudios/flask_shopping_list.git
-
-
-# copy every content from the local file to the image
+# Copy the current directory contents into the container at /app
 COPY . /app
 
-# configure the container to run in an executed manner
-ENTRYPOINT [ "python3" ]
+# Install any needed packages specified in requirements.txt
+RUN pip install -r requirements.txt
 
+# Make port 80 available to the world outside this container
+EXPOSE 50000
 
-CMD ["app.py" ]
+# Define environment variable
+ENV NAME World
+
+# Run app.py when the container launches
+CMD ["python3", "app.py"]
