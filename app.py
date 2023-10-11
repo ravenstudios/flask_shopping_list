@@ -13,6 +13,7 @@ app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 db = SQLAlchemy(app)
 
+
 class Shopping_list(db.Model):
     _id = db.Column(db.Integer, primary_key=True)
     item = db.Column(db.String(100))
@@ -21,30 +22,30 @@ class Shopping_list(db.Model):
         self.item = item
 
 
-@app.route('/add-new-item', methods = ['POST'])
-def add_new_item():
-    print("add new item")
-    data = request.json
-    itm = Shopping_list(data["item"])
-    db.session.add(itm)
-    db.session.commit()
-    return redirect("/")
 
 @app.route('/')
 def index():
     return render_template('index.html', shopping_list=Shopping_list.query.all())
 
 
-@app.route('/delete/<string:id>')
-def delete(id):
-    print(id)
-    Shopping_list.query.filter_by(_id=id).delete()
+
+@app.route('/add-new-item', methods = ['POST'])
+def add_new_item():
+    db.session.add(Shopping_list(request.json["item"]))
     db.session.commit()
     return redirect("/")
+
+
+
+@app.route('/delete-item', methods = ['POST'])
+def delete():
+    Shopping_list.query.filter_by(_id=request.json["id"]).delete()
+    db.session.commit()
+    return redirect("/")
+
+
 
 if __name__ == "__main__":
     with app.app_context():
         db.create_all()
-
-
     app.run(debug=True)

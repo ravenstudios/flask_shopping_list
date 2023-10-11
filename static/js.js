@@ -7,12 +7,15 @@
 
 $(()=> {
     $("#add-new-item").focus()
-    $("#submit-button").click(addNewItem())
+    $("#submit-button").click(()=> addNewItem())
     $("#add-new-item").keyup(function(event) {
       if (event.keyCode === 13) {
           addNewItem()
       }
-  });
+    });
+    $(".del-button").click((e)=>{
+      delItem(e.currentTarget.id)
+    })
 });
 
 function addNewItem() {
@@ -23,12 +26,26 @@ function addNewItem() {
     fetch("/add-new-item", {
     method: "POST",
     body: JSON.stringify({
-      item: textboxValue,
-      completed: false
+      item: textboxValue
     }),
     headers: {
       "Content-type": "application/json; charset=UTF-8"
     }
   }).then(()=>{location.reload()})
   }
+}
+
+
+function delItem(id) {
+
+  fetch("/delete-item", {
+  method: "POST",
+  body: JSON.stringify({
+    id: id
+  }),
+  headers: {
+    "Content-type": "application/json; charset=UTF-8"
+  }
+}).then(()=>{location.reload()})
+
 }
