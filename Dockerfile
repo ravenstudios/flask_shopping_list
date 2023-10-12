@@ -10,7 +10,7 @@ RUN pip install -r requirements.txt
 WORKDIR /app
 
 # Clone the GitHub repository
-RUN git clone https://github.com/ravenstudios/flask_shopping_list.git /app
+RUN git clone https://github.com/ravenstudios/flask_shopping_list.git:main /app
 
 COPY . /app
 COPY requirements.txt /app/requirements.txt
