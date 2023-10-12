@@ -1,14 +1,24 @@
-version: '3'
+version: '3.8'
 services:
-  downloader:
-    image: alpine:latest
-    volumes:
-      - ./app:/app
-    working_dir: /app
-    command: sh -c "apk --no-cache add git && git clone https://github.com/ravens>
-  flask_app:
-    build:
-      context: ./app
-      dockerfile: Dockerfile
-    ports:
-      - "5000:5000"
+  # web:
+  #   build: .
+  #   command: python /hms/manage.py runserver 0.0.0.0:1234
+  #   volumes:
+  #     - .:/home/ravenstudios/hms
+  #   ports:
+  #     - 1234:1234
+
+  web:
+      build: .
+      command: >
+        "app.py"
+      container_name: shopping_list
+      # depends_on:
+      #   - db
+      # env_file:
+      #   - .env
+      ports:
+        - "5000:5000"
+      restart: unless-stopped
+      volumes:
+        - .:/home/ravenstudios/shopping_list_flask
