@@ -19,7 +19,7 @@ RUN pip install -r requirements.txt
 EXPOSE 5000
 
 # Define environment variable
-$ENV NAME World
+#$ENV NAME World
 
 # Run app.py when the container launches
 CMD ["python3", "gunicorn -w 4 -b 0.0.0.0:5000 app:app"]
