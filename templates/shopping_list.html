@@ -10,10 +10,15 @@
   <ul>
   {% for item in shopping_list %}
       <li class="list-item">{{ item.item }}
-        <button id="{{ item._id }}" type="button" class="del-button">X</button>
+        <span>
+          <input id="{{ item._id }}" type="checkbox" class="delete-item-checkbox">
+          <button id="{{ item._id }}" type="button" class="del-button">X</button>
+        </span>
+
       </li>
 
   {% endfor %}
   </ul>
+  <button  id="del-checked-button"type="button" class="del-checked-button">Delete Checked</button>
 </div>
 {% endblock %}

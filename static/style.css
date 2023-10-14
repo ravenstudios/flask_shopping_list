@@ -72,3 +72,16 @@ body {
   height: 50px;
   font-size: 40px;
 }
+
+.delete-item-checkbox{
+  float:right;
+  height: 25px;
+  width: 25px;
+  float:right;
+  margin-top: 12px;
+  font-size: 20px;
+  background-color: red;
+  color:black;
+  border-radius: 10px;
+
+}

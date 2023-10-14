@@ -16,6 +16,28 @@ $(()=> {
     $(".del-button").click((e)=>{
       delItem(e.currentTarget.id)
     })
+
+    $("#del-checked-button").click(()=>{
+      let checkedObjects = []
+      $(".delete-item-checkbox").each((index, obj)=>{
+        let x = $(obj);
+        if ($(obj)[0].checked){
+          checkedObjects.push(obj.id)
+        }
+      });
+      console.log(checkedObjects);
+      fetch("/delete-multiple-items", {
+      method: "POST",
+      body: JSON.stringify({
+        data: checkedObjects
+      }),
+      headers: {
+        "Content-type": "application/json; charset=UTF-8"
+      }
+    }).then(()=>{location.reload()})
+    });
+
+
 });
 
 function addNewItem() {
@@ -47,5 +69,9 @@ function delItem(id) {
     "Content-type": "application/json; charset=UTF-8"
   }
 }).then(()=>{location.reload()})
+
+}
+
+function deleteAll(){
 
 }

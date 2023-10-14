@@ -46,12 +46,19 @@ def delete():
     return redirect("/")
 
 
+@app.route('/delete-multiple-items', methods = ['POST'])
+def delete_mul_itmes():
+    for id in request.json["data"]:
+        Shopping_list.query.filter_by(_id=id).delete()
+    db.session.commit()
+    return redirect("/")
+
 
 if __name__ == "__main__":
 
 
     with app.app_context():
         db.create_all()
-    # app.run(debug=True)
-    from waitress import serve
-    serve(app, host="0.0.0.0", port=5000)
+    app.run(debug=True)
+    # from waitress import serve
+    # serve(app, host="0.0.0.0", port=5000)
