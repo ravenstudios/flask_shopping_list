@@ -4,7 +4,7 @@ from flask import url_for
 from flask import render_template
 from flask import request
 from flask_sqlalchemy import SQLAlchemy
-
+import push_notifications
 
 
 app = Flask(__name__, static_url_path='/static')
@@ -31,8 +31,10 @@ def index():
 
 @app.route('/add-new-item', methods = ['POST'])
 def add_new_item():
-    db.session.add(Shopping_list(request.json["item"]))
+    item = request.json["item"]
+    db.session.add(Shopping_list(item))
     db.session.commit()
+    push_notifications.send_message(item)
     return redirect("/")
 
 
@@ -46,6 +48,8 @@ def delete():
 
 
 if __name__ == "__main__":
+
+
     with app.app_context():
         db.create_all()
     # app.run(debug=True)
