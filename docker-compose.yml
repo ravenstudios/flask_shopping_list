@@ -10,4 +10,4 @@ services:
         - "5000:5000"
       restart: unless-stopped
       volumes:
-        - .:/home/ravenstudios/shopping_list_flask
+        - .:/home/ravenstudios/flask_shopping_list
