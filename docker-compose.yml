@@ -1,22 +1,11 @@
-version: '3.8'
+version: '3.9'
 services:
-  # web:
-  #   build: .
-  #   command: python /hms/manage.py runserver 0.0.0.0:1234
-  #   volumes:
-  #     - .:/home/ravenstudios/hms
-  #   ports:
-  #     - 1234:1234
 
-  web:
+  shopping_list:
+      env_file:
+        - .env
       build: .
-      command: >
-        "app.py"
       container_name: shopping_list
-      # depends_on:
-      #   - db
-      # env_file:
-      #   - .env
       ports:
         - "5000:5000"
       restart: unless-stopped
