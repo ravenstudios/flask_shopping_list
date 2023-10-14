@@ -25,7 +25,7 @@ def send_message(message):
     retry = 60
     expire = 600
     answer = 1
-    image_1 = "base64.encodebytes(image_read)"
+    image_1 = ""
     image_2 = ""
     image_3 =""
 
