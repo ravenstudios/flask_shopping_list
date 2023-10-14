@@ -18,23 +18,7 @@ $(()=> {
     })
 
     $("#del-checked-button").click(()=>{
-      let checkedObjects = []
-      $(".delete-item-checkbox").each((index, obj)=>{
-        let x = $(obj);
-        if ($(obj)[0].checked){
-          checkedObjects.push(obj.id)
-        }
-      });
-      console.log(checkedObjects);
-      fetch("/delete-multiple-items", {
-      method: "POST",
-      body: JSON.stringify({
-        data: checkedObjects
-      }),
-      headers: {
-        "Content-type": "application/json; charset=UTF-8"
-      }
-    }).then(()=>{location.reload()})
+      deleteMultiple()
     });
 
 
@@ -72,6 +56,22 @@ function delItem(id) {
 
 }
 
-function deleteAll(){
+function deleteMultiple(){
+  let checkedObjects = []
+  $(".delete-item-checkbox").each((index, obj)=>{
+    let x = $(obj);
+    if ($(obj)[0].checked){
+      checkedObjects.push(obj.id)
+    }
+  });
 
+  fetch("/delete-multiple-items", {
+    method: "POST",
+    body: JSON.stringify({
+      data: checkedObjects
+    }),
+    headers: {
+      "Content-type": "application/json; charset=UTF-8"
+    }
+  }).then(()=>{location.reload()})
 }
